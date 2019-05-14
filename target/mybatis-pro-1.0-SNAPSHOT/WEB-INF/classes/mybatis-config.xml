@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+    properties配置，用于加载外部的properties配置文件
+    -->
+    <properties resource="db.properties"></properties>
+
+    <!--
+    environments 主要用户数据源的配置
+    可以配置多个数据源，通过default属性来指定当前项目运行过程中使用的是哪个数据源
+    -->
+    <environments default="development">
+        <!--
+        environment 用于配置一个具体的独立的数据源
+        id属性用于给当前数据源定义一个名称，方便我们的项目指定
+        -->
+        <environment id="development">
+            <!--
+            transactionManager用于配置事务管理，默认情况下使用的是JDBC事务管理
+            -->
+            <transactionManager type="JDBC"/>
+            <!-- 使用数据库连接池 -->
+            <!--
+            dataSource具体数据源的连接信息：type属性用于指定是否使用数据库连接池
+            -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+
+        <environment id="product">
+            <transactionManager type="JDBC"/>
+            <!-- 使用数据库连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <!-- 使用数据库连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--mappers主要用于配置我们外部的映射配置文件，在主配置中需要引入加载映射配置文件
+        映射配置文件的路径
+    -->
+    <mappers>
+        <!-- mapper主要配置引入某一个具体的映射文件，resource进行路径方式的引入-->
+        <mapper resource="mapper/usersMapper.xml"/>
+    </mappers>
+</configuration>
